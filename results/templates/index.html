@@ -139,6 +139,9 @@
             {% csrf_token %}
             <input id="input" name="roll_number" type="text" placeholder="Enter Your Roll Number">
             <button type="submit" class="button">Submit</button>
+			{%if error%}
+			<p style="color:red">{{error}}
+			{% endif%}
         </form>
     </div>
 </body>

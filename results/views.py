@@ -7,6 +7,10 @@ def home(request):
         return render(request, 'index.html')
     if  request.method =="POST":
         roll_number = request.POST.get('roll_number')
-        result= Results.objects.get(roll_number=roll_number)
+        try:
+            result = Results.objects.get(roll_number=roll_number)
+        except Results.DoesNotExist:
+            error ='Invalid roll number'
+            return render(request,'index.html',{'error':error})
         context={'result': result}
         return render(request, 'results.html',context)
