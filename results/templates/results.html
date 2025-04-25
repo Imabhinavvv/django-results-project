@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            font-family: 'Segoe UI', Verdana, sans-serif;
+        }
+
+        .card {
+            width: 34rem;
+            height: 36rem;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            padding: 20px;
+            animation: slideIn 0.8s ease-out;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #ffd700;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        hr {
+            width: 12rem;
+            height: 4px;
+            background: #ff6f61;
+            border: none;
+            border-radius: 2px;
+            margin: 0 auto 1.5rem;
+            animation: expand 0.8s ease-out;
+        }
+
+        @keyframes expand {
+            from { width: 0; }
+            to { width: 12rem; }
+        }
+
+        .result-details {
+            margin: 1.5rem 0;
+        }
+
+        h4, h5 {
+            color: #333;
+            margin: 0.5rem 0;
+            font-weight: normal;
+            font-size: 1.1rem;
+            animation: fadeIn 1.2s ease-in;
+        }
+
+        h4 {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        h3 {
+            color: #ff6f61;
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        h3 span {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .button {
+            display: inline-block;
+            width: 8rem;
+            height: 2.8rem;
+            line-height: 2.8rem;
+            border: 2px solid #ff6f61;
+            border-radius: 8px;
+            background-color: #fff;
+            color: #ff6f61;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .button:hover {
+            background-color: #ff6f61;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .button:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Result</h2>
+        <hr>
+        <div class="result-details">
+            <h4>Name: {{result.name}}</h4>
+            <h5>Roll Number: {{result.roll_number}}</h5>
+            <h5>Branch: {{result.branch}}</h5>
+            <h5>BDA: {{result.big_data}}</h5>
+            <h5>ML: {{result.ml}}</h5>
+            <h5>STM: {{result.stm}}</h5>
+            <h5>DPPM: {{result.dppm}}</h5>
+            <h5>ATCD: {{result.atcd}}</h5>
+            <h5>Percentage: {{result.percentage}}%</h5>
+        </div>
+        {%if result.final_result == 'PASS'%}
+        <h3 >Final Result: <span style="color:green ">{{result.final_result}}</span></h3>
+        {%else%}
+        <h3 >Final Result: <span style="color:red ">{{result.final_result}}</span></h3>
+        {% endif%}
+        
+        <a href="{% url 'home' %}"><span class="button">Back to Home</span></a>
+    </div>
+</body>
+</html>
